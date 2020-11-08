@@ -1,0 +1,141 @@
+stages:
+  - prepare
+  - test
+  - build
+  - deploy
+
+image: node:14
+
+cache:
+  key: ${CI_COMMIT_REF_SLUG}
+  paths:
+    - ./node_modules/
+
+install:
+  stage: prepare
+  tags:
+    - docker
+  script:
+    - npm install
+
+lint:
+  stage: test
+  tags:
+    - docker
+  before_script:
+    - npm install
+  script:
+    - npm run lint
+
+test:
+  stage: test
+  tags:
+    - docker
+  before_script:
+    - npm install
+  script:
+    - npm run test
+  allow_failure: true
+
+build:android:debug:
+  stage: build
+  tags:
+    - android
+    - node
+    - react-native
+  before_script:
+    - npm install
+  script:
+    - ./scripts/build-android-debug.sh
+  artifacts:
+    paths:
+      - ./build/app-debug.apk
+  cache:
+    key: ${CI_COMMIT_REF_SLUG}-android-ios
+    paths:
+      - ./node_modules/
+      - ./android/.gradle/
+
+deploy:android:debug:
+  stage: deploy
+  dependencies:
+    - build:android:debug
+  cache: {}
+  # only:
+  #   - develop
+  tags:
+    - docker
+  image: emiketic/essentials
+  variables:
+    APPETIZE_PLATFORM: android
+    APPETIZE_ID: $APPETIZE_ANDROID_ID
+  script:
+    - ./scripts/deploy.sh ./build/app-debug.apk
+
+# android:release:build:
+#   stage: build
+#   only:
+#     - master
+#   tags:
+#     - android
+#     - node
+#     - react-native
+#   before_script:
+#     - npm install
+#   script:
+#     - ./scripts/build-android-release.sh
+#     - ./scripts/deploy.sh ./build/app-release.apk
+#   artifacts:
+#     paths:
+#       - ./build/app-release.apk
+
+build:ios:debug:
+  stage: build
+  tags:
+    - ios
+    - node
+    - react-native
+  before_script:
+    - npm install
+  script:
+    - ./scripts/build-ios-debug.sh
+  artifacts:
+    paths:
+      - ./build/app-debug.zip
+  cache:
+    key: ${CI_COMMIT_REF_SLUG}-ios
+    paths:
+      - ./node_modules/
+      - ./ios/Pods/
+
+deploy:ios:debug:
+  stage: deploy
+  dependencies:
+    - build:ios:debug
+  cache: {}
+  # only:
+  #   - develop
+  tags:
+    - docker
+  image: emiketic/essentials
+  variables:
+    APPETIZE_PLATFORM: ios
+    APPETIZE_ID: $APPETIZE_IOS_ID
+  script:
+    - ./scripts/deploy.sh ./build/app-debug.zip
+# build:ios:release:
+#   stage: build
+#   only:
+#     - master
+#   tags:
+#     - ios
+#     - node
+#     - react-native
+#   before_script:
+#     - npm install
+#   script:
+#     - ./scripts/build-ios-release.sh
+#     - ./scripts/deploy.sh ./build/app-release.zip
+#   artifacts:
+#     paths:
+#       - ./build/app-release.zip
