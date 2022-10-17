@@ -20,7 +20,7 @@
 ## Requirements
 
 - [Node.js](https://nodejs.org/)
-- [React Native CLI](https://www.npmjs.com/package/react-native-cli) (`npm -g install react-native-cli`)
+- [React Native CLI](https://www.npmjs.com/package/react-native-cli)
 - Xcode Command Line tools (`xcode-select --install`)
 - [CocoaPods](https://cocoapods.org/) (`gem install cocoapods`)
 - [xcpretty](https://github.com/supermarin/xcpretty) (`gem install xcpretty`)

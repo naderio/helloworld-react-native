@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -eou pipefailset -x
+set -eou pipefail -x
 
 BUILD=$1
 

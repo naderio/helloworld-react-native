@@ -50,9 +50,10 @@ function DraftView() {
           block
           dark
           onPress={() => {
-            Interaction.confirm({ title: 'Title', content: 'Confirmation' }).then((r) =>
-              Interaction.toast({ type: Interaction.INFO, content: r }),
-            );
+            Interaction.confirm({
+              title: 'Title',
+              content: 'Confirmation',
+            }).then((r) => Interaction.toast({ type: Interaction.INFO, content: r }));
           }}
         >
           <Text>Confirm</Text>
@@ -62,9 +63,10 @@ function DraftView() {
           block
           dark
           onPress={() => {
-            Interaction.confirmWithNeutral({ title: 'Title', content: 'confirmWithNeutral' }).then((r) =>
-              Interaction.toast({ type: Interaction.INFO, content: r }),
-            );
+            Interaction.confirmWithNeutral({
+              title: 'Title',
+              content: 'confirmWithNeutral',
+            }).then((r) => Interaction.toast({ type: Interaction.INFO, content: r }));
           }}
         >
           <Text>confirmWithNeutral</Text>

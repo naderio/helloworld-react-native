@@ -66,7 +66,7 @@ deploy:android:debug:
   #   - develop
   tags:
     - docker
-  image: emiketic/essentials
+  image: naderbri/essentials
   variables:
     APPETIZE_PLATFORM: android
     APPETIZE_ID: $APPETIZE_ANDROID_ID
@@ -118,7 +118,7 @@ deploy:ios:debug:
   #   - develop
   tags:
     - docker
-  image: emiketic/essentials
+  image: naderbri/essentials
   variables:
     APPETIZE_PLATFORM: ios
     APPETIZE_ID: $APPETIZE_IOS_ID

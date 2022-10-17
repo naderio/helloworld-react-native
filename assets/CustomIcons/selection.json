@@ -11,11 +11,21 @@
     "showSVGs": true,
     "fontPref": {
       "prefix": "icon-",
-      "metadata": { "fontFamily": "CustomIcons", "majorVersion": 1, "minorVersion": 0 },
+      "metadata": {
+        "fontFamily": "CustomIcons",
+        "majorVersion": 1,
+        "minorVersion": 0
+      },
       "metrics": { "emSize": 1024, "baseline": 6.25, "whitespace": 50 },
       "embed": false
     },
-    "imagePref": { "prefix": "icon-", "png": true, "useClassSelector": true, "color": 0, "bgColor": 16777215 },
+    "imagePref": {
+      "prefix": "icon-",
+      "png": true,
+      "useClassSelector": true,
+      "color": 0,
+      "bgColor": 16777215
+    },
     "historySize": 50
   }
 }
